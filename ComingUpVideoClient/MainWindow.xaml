@@ -1,0 +1,38 @@
+﻿<Controls:MetroWindow x:Class="ComingUpVideoClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        EnableDWMDropShadow="True"
+        xmlns:local="clr-namespace:ComingUpVideoClient"
+        mc:Ignorable="d"
+        Title="PTV-ComingUp-Video-Client 20150810" Height="254" Width="525">
+    <Grid Background="Black" Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="252*"/>
+            <ColumnDefinition Width="227*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="groupBox" Header="Program1" HorizontalAlignment="Left" Margin="11,9,0,0" VerticalAlignment="Top" Height="80" Width="498" Grid.ColumnSpan="3">
+            <Grid VerticalAlignment="Top" >
+                <TextBox x:Name="txtTitle1" HorizontalAlignment="Left" Height="23" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220"/>
+                <Label x:Name="label" Content="Title:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+                <Button ToolTip="Window navigation demo"  Content="Browse" Width="60" Margin="416,6,10.4,0" Height="30"  Name="btnBrowse1" Click="btnBrowse1_Click"/>
+                <TextBox x:Name="txtTime1" HorizontalAlignment="Left" Height="23" Margin="315,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96"/>
+                <Label x:Name="label_Copy" Content="Time:" HorizontalAlignment="Left" Margin="275,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+                 </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox_Copy" Header="Program2" HorizontalAlignment="Left" Margin="11,94,0,0" VerticalAlignment="Top" Height="80" Width="498" Grid.ColumnSpan="3">
+            <Grid VerticalAlignment="Top" >
+                <TextBox x:Name="txtTitle2" HorizontalAlignment="Left" Height="23" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"/>
+                <Label x:Name="label1" Content="Title:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+                <Button ToolTip="Window navigation demo"  Content="Browse" Width="60" Margin="416,6,10.4,0" Height="30"  Name="btnBrowse2" Click="btnBrowse2_Click"/>
+                <TextBox x:Name="txtTime2" HorizontalAlignment="Left" Height="23" Margin="320,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96"/>
+                <Label x:Name="label_Copy1" Content="Time:" HorizontalAlignment="Left" Margin="276,7,0,0" VerticalAlignment="Top" Foreground="White"/>
+
+            </Grid>
+        </GroupBox>
+        <Button ToolTip="Send files to server"  Content="Upload"  Height="20" Grid.ColumnSpan="2" Margin="105.8,181,146.4,18.8" Click="Button_Click" Grid.Column="1"  />
+    </Grid>
+</Controls:MetroWindow>
