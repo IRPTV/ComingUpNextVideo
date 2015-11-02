@@ -50,7 +50,7 @@ WHERE        (datetime &gt; getdate()) AND (type LIKE N'Rec%' OR
                          type = N'L-P-R' OR
                          type = N'L-P-N' OR
                          type = N'L-P') AND (NOT (name LIKE '%(Cont.)%'))
-and  LEN(source) &gt; 5
+and  LEN(source) &gt; 5 and  source LIKE '%.mp4%'
 ORDER BY datetime</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -100,7 +100,7 @@ SELECT TOP (2) id, datetime, name, type, time, source FROM tblData WHERE (id = @
   <xs:element name="MyDB" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MyDB" msprop:Generator_UserDSName="MyDB">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="tblData" msprop:Generator_TableClassName="tblDataDataTable" msprop:Generator_TableVarName="tabletblData" msprop:Generator_TablePropName="tblData" msprop:Generator_RowDeletingName="tblDataRowDeleting" msprop:Generator_RowChangingName="tblDataRowChanging" msprop:Generator_RowEvHandlerName="tblDataRowChangeEventHandler" msprop:Generator_RowDeletedName="tblDataRowDeleted" msprop:Generator_UserTableName="tblData" msprop:Generator_RowChangedName="tblDataRowChanged" msprop:Generator_RowEvArgName="tblDataRowChangeEvent" msprop:Generator_RowClassName="tblDataRow">
+        <xs:element name="tblData" msprop:Generator_TableClassName="tblDataDataTable" msprop:Generator_TableVarName="tabletblData" msprop:Generator_RowChangedName="tblDataRowChanged" msprop:Generator_TablePropName="tblData" msprop:Generator_RowDeletingName="tblDataRowDeleting" msprop:Generator_RowChangingName="tblDataRowChanging" msprop:Generator_RowEvHandlerName="tblDataRowChangeEventHandler" msprop:Generator_RowDeletedName="tblDataRowDeleted" msprop:Generator_RowClassName="tblDataRow" msprop:Generator_UserTableName="tblData" msprop:Generator_RowEvArgName="tblDataRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:decimal" />
