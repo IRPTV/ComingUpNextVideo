@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComingUpVideoClient", "ComingUpVideoClient\ComingUpVideoClient.csproj", "{1CDFAB0C-9352-4DE8-ABC1-144C7B05FCE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComingUpVideoServer", "ComingUpVideoServer\ComingUpVideoServer.csproj", "{7A9825E5-B8A9-4CFB-B1D9-0D4A8578079B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CDFAB0C-9352-4DE8-ABC1-144C7B05FCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDFAB0C-9352-4DE8-ABC1-144C7B05FCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDFAB0C-9352-4DE8-ABC1-144C7B05FCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDFAB0C-9352-4DE8-ABC1-144C7B05FCE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9825E5-B8A9-4CFB-B1D9-0D4A8578079B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9825E5-B8A9-4CFB-B1D9-0D4A8578079B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9825E5-B8A9-4CFB-B1D9-0D4A8578079B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9825E5-B8A9-4CFB-B1D9-0D4A8578079B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
