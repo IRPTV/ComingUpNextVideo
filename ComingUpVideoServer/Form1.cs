@@ -9,11 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-<<<<<<< HEAD
-using ComingUpVideoServer.MyDBTableAdapters;
-=======
 
->>>>>>> origin/master
+using ComingUpVideoServer.MyDBTableAdapters;
+
 namespace ComingUpVideoServer
 {
     public partial class Form1 : Form
@@ -52,8 +50,6 @@ namespace ComingUpVideoServer
                 }
 
             }
-<<<<<<< HEAD
-
 
         //GetList:
             tblDataTableAdapter Ta = new tblDataTableAdapter();
@@ -246,7 +242,7 @@ namespace ComingUpVideoServer
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             richTextBox1.ScrollToCaret();
             Application.DoEvents();
-=======
+
             if (CopyFiles())
             {
                 Renderer();
@@ -301,7 +297,7 @@ namespace ComingUpVideoServer
                 richTextBox1.ScrollToCaret();
                 return false;
             }
->>>>>>> origin/master
+
         }
         protected void Renderer()
         {
@@ -367,7 +363,7 @@ namespace ComingUpVideoServer
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-<<<<<<< HEAD
+
             string[] Timesvl = ConfigurationSettings.AppSettings["RenderIntervalMin"].ToString().Trim().Split('#');
             foreach (string item in Timesvl)
             {
@@ -377,17 +373,13 @@ namespace ComingUpVideoServer
                     button1_Click(new object(), new EventArgs());
                 }
             }
-=======
+
             button1_Click(new object(), new EventArgs());
->>>>>>> origin/master
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Enabled = true;
-<<<<<<< HEAD
-=======
-            timer1.Interval = int.Parse(ConfigurationSettings.AppSettings["RenderIntervalSec"].ToString().Trim()) * 1000;
->>>>>>> origin/master
         }
     }
 }
