@@ -60,26 +60,31 @@ namespace ComingUpVideoServer
                 Process proc = new Process();
                 proc.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + "//mencoder";
                 string time1 = Dt[0]["time"].ToString().Trim().Split('#')[0];
-                if (!time1.Trim().ToString().Contains(":"))
+                if (!time1.Trim().ToString().Contains(":") || string.IsNullOrEmpty(time1))
                     time1 = "00:00:00";
-                File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4");
-                File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "01.mp4");
-                File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4");
-                File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "02.mp4");
-                File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0001.mp4");
-                File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0002.mp4");
+                try
+                {
+                    File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4");
+                    File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "01.mp4");
+                    File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4");
+                    File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "02.mp4");
+                    File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0001.mp4");
+                    File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0002.mp4");
+                }
+                catch { }
                 File.Copy(Dt[0]["source"].ToString().Trim().Split('[')[0].Trim(), ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4", true);
+             
                 //proc.StartInfo.Arguments = " -ss " + time1 + " -i " + "  \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4" + "\"   -t 00:00:10 -y \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "01.mp4\"";
                 // richTextBox1.Text = " -ss " + time1 + " -endpos 00:00:10 -oac pcm -ovc copy " + "  \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4" + "\"   -o \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "01.mp4\"";
+            
                 proc.StartInfo.Arguments = " -ss " + time1 + " -endpos 00:00:10 -oac pcm -ovc x264 " + "  \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4" + "\"   -o \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0001.mp4\"";
                 //-ss 00:30:00 -endpos 00:00:05 -oac copy -ovc copy originalfile -o newfile
-                LogWriter(proc.StartInfo.Arguments);
+                //LogWriter("CMD:"+proc.StartInfo.Arguments);
                 proc.StartInfo.RedirectStandardError = true;
                 proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.CreateNoWindow = true;
                 proc.EnableRaisingEvents = true;
                 proc.Start();
-                proc.PriorityClass = ProcessPriorityClass.Normal;
                 StreamReader reader = proc.StandardError;
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -93,7 +98,7 @@ namespace ComingUpVideoServer
                 LogWriter("Start Triming Video 2");
                 Process proc2 = new Process();
                 string time2 = Dt[1]["time"].ToString().Trim().Split('#')[0];
-                if (!time2.Trim().ToString().Contains(":"))
+                if (!time2.Trim().ToString().Contains(":") || string.IsNullOrEmpty(time2))
                     time2 = "00:00:00";
                 File.Copy(Dt[1]["source"].ToString().Trim().Split('[')[0].Trim(), ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4", true);
                 proc2.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + "//mencoder";
@@ -115,7 +120,7 @@ namespace ComingUpVideoServer
                 proc2.Close();
                 Repair("0002", "02");
                 LogWriter("End Triming Video 2");
-                //Xml:
+            //Xml:
                 StringBuilder Data = new StringBuilder();
                 for (int i = 0; i < Dt.Rows.Count; i++)
                 {
@@ -123,6 +128,8 @@ namespace ComingUpVideoServer
                     //2014-01-25 Replace Documentry by Doc
                     ProgName = ProgName.Replace("documentary", "Doc");
                     ProgName = ProgName.Replace("Documentary", "Doc");
+                    ProgName = ProgName.Replace("Medium Items - 1 - ", "");
+                    ProgName = ProgName.Replace("Medium Items - 2 - ", "");
                     int FirstIndex = ProgName.IndexOf("-");
                     int SecondIndex = 0;
                     if (FirstIndex > 0)
@@ -174,7 +181,8 @@ namespace ComingUpVideoServer
                     }
                     DateTime ProgTime = DateTime.Parse(Dt.Rows[i]["datetime"].ToString());
                     //Program1 = ["The World after Fukushima 2","01:00"]
-                    string ProgTimeText = ProgTime.Hour.ToString("00") + ":" + ConfigurationSettings.AppSettings["TimeScheduleMinute"].ToString();
+                    string ProgTimeText = ProgTime.Hour.ToString("00") + ":" + Math.Floor((decimal)ProgTime.Minute).ToString("00");
+                    //string ProgTimeText = ProgTime.Hour.ToString("00") + ":" + ConfigurationSettings.AppSettings["TimeScheduleMinute"].ToString();
                     Data.AppendLine("Program" + (i + 1).ToString() + " = [\"" + ProgName + "\"]");
                     Data.AppendLine("Time" + (i + 1).ToString() + " = [\"" + ProgTimeText + " GMT\"]");
                 }
@@ -220,13 +228,6 @@ namespace ComingUpVideoServer
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             richTextBox1.ScrollToCaret();
             Application.DoEvents();
-
-            if (CopyFiles())
-            {
-                Renderer();
-                richTextBox1.Text = "Last Render:" + DateTime.Now.ToString();
-            }
-            timer1.Enabled = true;
         }
         protected bool CopyFiles()
         {
@@ -341,7 +342,6 @@ namespace ComingUpVideoServer
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-
             string[] Timesvl = ConfigurationSettings.AppSettings["RenderIntervalMin"].ToString().Trim().Split('#');
             foreach (string item in Timesvl)
             {
@@ -351,9 +351,6 @@ namespace ComingUpVideoServer
                     button1_Click(new object(), new EventArgs());
                 }
             }
-
-            button1_Click(new object(), new EventArgs());
-
         }
         private void Form1_Load(object sender, EventArgs e)
         {
