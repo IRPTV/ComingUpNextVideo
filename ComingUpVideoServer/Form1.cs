@@ -62,14 +62,14 @@ namespace ComingUpVideoServer
                 string time1 = Dt[0]["time"].ToString().Trim().Split('#')[0];
                 if (!time1.Trim().ToString().Contains(":") || string.IsNullOrEmpty(time1))
                     time1 = "00:00:00";
-                else
-                {
-                    string[] tmptime1 = time1.Split(':');
-                    if (tmptime1.Length == 3)
-                        time1 = "00:" + tmptime1[0] + ":" + tmptime1[1];
-                    if (tmptime1.Length == 4)
-                        time1 = tmptime1[0] + ":" + tmptime1[1] + ":" + tmptime1[2];
-                }
+                //else
+                //{
+                //    string[] tmptime1 = time1.Split(':');
+                //    if (tmptime1.Length == 3)
+                //        time1 = "00:" + tmptime1[0] + ":" + tmptime1[1];
+                //    if (tmptime1.Length == 4)
+                //        time1 = tmptime1[0] + ":" + tmptime1[1] + ":" + tmptime1[2];
+                //}
                 try
                 {
                     File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4");
@@ -108,14 +108,14 @@ namespace ComingUpVideoServer
                 string time2 = Dt[1]["time"].ToString().Trim().Split('#')[0];
                 if (!time2.Trim().ToString().Contains(":") || string.IsNullOrEmpty(time2))
                     time2 = "00:00:00";
-                else
-                {
-                    string[] tmptime2 = time2.Split(':');
-                    if (tmptime2.Length == 3)
-                        time2 = "00:" + tmptime2[0] + ":" + tmptime2[1];
-                    if (tmptime2.Length == 4)
-                        time2 =tmptime2[0] + ":" + tmptime2[1] + ":" + tmptime2[2];
-                }
+                //else
+                //{
+                //    string[] tmptime2 = time2.Split(':');
+                //    if (tmptime2.Length == 3)
+                //        time2 = "00:" + tmptime2[0] + ":" + tmptime2[1];
+                //    if (tmptime2.Length == 4)
+                //        time2 =tmptime2[0] + ":" + tmptime2[1] + ":" + tmptime2[2];
+                //}
                 File.Copy(Dt[1]["source"].ToString().Trim().Split('[')[0].Trim(), ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4", true);
                 proc2.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + "//mencoder";
                 proc2.StartInfo.Arguments = " -ss " + time2 + " -endpos 00:00:10 -oac pcm -ovc x264 " + "  \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4" + "\"   -o \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0002.mp4\"";
