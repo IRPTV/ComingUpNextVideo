@@ -63,7 +63,7 @@ namespace ComingUpVideoServer
                     proc.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + "//mencoder";
                     string time1 = Dt[0]["time"].ToString().Trim().Split('#')[0];
                     if (!time1.Trim().ToString().Contains(":") || string.IsNullOrEmpty(time1))
-                        time1 = "00:00:30";
+                        time1 = "00:02:00";
                     //else
                     //{
                     //    string[] tmptime1 = time1.Split(':');
@@ -109,7 +109,7 @@ namespace ComingUpVideoServer
                     Process proc2 = new Process();
                     string time2 = Dt[1]["time"].ToString().Trim().Split('#')[0];
                     if (!time2.Trim().ToString().Contains(":") || string.IsNullOrEmpty(time2))
-                        time2 = "00:00:30";
+                        time2 = "00:02:00";
                     //else
                     //{
                     //    string[] tmptime2 = time2.Split(':');
