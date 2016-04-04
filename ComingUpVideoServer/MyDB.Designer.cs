@@ -1007,7 +1007,6 @@ SELECT TOP (2) id, datetime, name, type, time, source FROM tblData WHERE (id = @
 FROM            tblData
 WHERE        (datetime > getdate()) AND (type LIKE N'Rec%' OR
                          type LIKE N'Doc%' OR
-                         type LIKE N'Med%' OR
                          type = N'L-P-R' OR
                          type = N'L-P-N' OR
                          type = N'L-P') AND (NOT (name LIKE '%(Cont.)%'))
