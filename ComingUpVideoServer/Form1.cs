@@ -211,9 +211,18 @@ namespace ComingUpVideoServer
                     //Render:
                     Renderer();
                 }
+                else
+                {
+                    File.WriteAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "NO RECORD**" + DateTime.Now.ToString()+"\r\n");
+                }
             }
-            catch { }
+            catch  (Exception s){
+                File.WriteAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "ERROR**" + DateTime.Now.ToString()+"**"+s.Message + "\r\n");
+            }
             timer1.Enabled = true;
+            button1.ForeColor = Color.White;
+            button1.Text = "Start";
+            button1.BackColor = Color.Navy;
         }
         protected void Repair(string Infile, string OutFile)
         {
