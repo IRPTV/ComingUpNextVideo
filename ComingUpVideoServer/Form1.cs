@@ -22,6 +22,7 @@ namespace ComingUpVideoServer
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "\r\n====================\r\n");
             button1.ForeColor = Color.White;
             button1.Text = "Started";
             button1.BackColor = Color.Red;
@@ -50,6 +51,7 @@ namespace ComingUpVideoServer
                     }
 
                 }
+                File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "START      " + DateTime.Now.ToString() + "\r\n");
                 //GetList:
                 tblDataTableAdapter Ta = new tblDataTableAdapter();
                 MyDB.tblDataDataTable Dt = Ta.GetList();
@@ -82,6 +84,7 @@ namespace ComingUpVideoServer
                         File.Delete(ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0002.mp4");
                     }
                     catch { }
+                    File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "FILE1      " + Dt[0]["source"].ToString().Trim().Split('[')[0].Trim()+"        " + DateTime.Now.ToString() + "\r\n");
                     File.Copy(Dt[0]["source"].ToString().Trim().Split('[')[0].Trim(), ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4", true);
 
                     //proc.StartInfo.Arguments = " -ss " + time1 + " -i " + "  \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "001.mp4" + "\"   -t 00:00:10 -y \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "01.mp4\"";
@@ -118,6 +121,7 @@ namespace ComingUpVideoServer
                     //    if (tmptime2.Length == 4)
                     //        time2 =tmptime2[0] + ":" + tmptime2[1] + ":" + tmptime2[2];
                     //}
+                    File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "FILE2      " + Dt[1]["source"].ToString().Trim().Split('[')[0].Trim() + "        " + DateTime.Now.ToString() + "\r\n");
                     File.Copy(Dt[1]["source"].ToString().Trim().Split('[')[0].Trim(), ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4", true);
                     proc2.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + "//mencoder";
                     proc2.StartInfo.Arguments = " -ss " + time2 + " -endpos 00:00:10 -oac pcm -ovc x264 " + "  \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "002.mp4" + "\"   -o \"" + ConfigurationSettings.AppSettings["VideosPath"].ToString().Trim() + "0002.mp4\"";
@@ -213,11 +217,11 @@ namespace ComingUpVideoServer
                 }
                 else
                 {
-                    File.WriteAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "NO RECORD**" + DateTime.Now.ToString()+"\r\n");
+                    File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "NORECORD   " + DateTime.Now.ToString()+"\r\n");
                 }
             }
             catch  (Exception s){
-                File.WriteAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "ERROR**" + DateTime.Now.ToString()+"**"+s.Message + "\r\n");
+                File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "ERROR      " + DateTime.Now.ToString()+"**"+s.Message + "\r\n");
             }
             timer1.Enabled = true;
             button1.ForeColor = Color.White;
@@ -352,7 +356,7 @@ namespace ComingUpVideoServer
                     Application.DoEvents();
                 }
                 proc.Close();
-
+                File.AppendAllText(ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + "//log.txt", "DONE      " + ConfigurationSettings.AppSettings["OutputPath"].ToString().Trim() + ConfigurationSettings.AppSettings["OutPutFileName"].ToString().Trim() + "_" + DateTimeStr + ".mp4" + "        " + DateTime.Now.ToString() + "\r\n");
                 try
                 {
                     string StaticDestFileName = ConfigurationSettings.AppSettings["ScheduleDestFileName"].ToString().Trim();
