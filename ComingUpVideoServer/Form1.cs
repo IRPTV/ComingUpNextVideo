@@ -35,11 +35,14 @@ namespace ComingUpVideoServer
                     {
                         if (File.GetLastAccessTime(item) < DateTime.Now.AddHours(-48))
                         {
-                            File.Delete(item);
-                            richTextBox1.Text += (item) + " *Deleted* \n";
-                            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-                            richTextBox1.ScrollToCaret();
-                            Application.DoEvents();
+                            if (!item.ToLower().Contains("log"))
+                            {
+                                File.Delete(item);
+                                richTextBox1.Text += (item) + " *Deleted* \n";
+                                richTextBox1.SelectionStart = richTextBox1.Text.Length;
+                                richTextBox1.ScrollToCaret();
+                                Application.DoEvents();
+                            }
                         }
                     }
                     catch (Exception Exp)
