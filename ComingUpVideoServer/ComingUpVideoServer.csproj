@@ -68,6 +68,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyDB.cs">
+      <DependentUpon>MyDB.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MyDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
