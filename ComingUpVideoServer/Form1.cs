@@ -155,6 +155,10 @@ namespace ComingUpVideoServer
                         ProgName = ProgName.Replace("Documentary", "Doc");
                         ProgName = ProgName.Replace("Medium Items - 1 - ", "");
                         ProgName = ProgName.Replace("Medium Items - 2 - ", "");
+                        for (int j = 0; j < 2001; j++)
+                        {
+                            ProgName = ProgName.Replace("Medium Items - " + j.ToString() + " - ", "");
+                        }
                         int FirstIndex = ProgName.IndexOf("-");
                         int SecondIndex = 0;
                         if (FirstIndex > 0)
