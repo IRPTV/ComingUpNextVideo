@@ -1010,7 +1010,7 @@ WHERE        (datetime > getdate()) AND (type LIKE N'Rec%' OR
                          type = N'L-P-R' OR
                          type = N'L-P-N' OR
                          type like N'Med%' OR
-                         type = N'L-P') AND (NOT (name LIKE '%(Cont.)%'))
+                         type = N'L-P') AND (NOT (name LIKE '%(Cont.)%')) and duration>300
 and  LEN(source) > 5 and  source LIKE '%.mp4%'
 ORDER BY datetime";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
